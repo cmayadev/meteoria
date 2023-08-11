@@ -1,11 +1,12 @@
 export async function getWeather() {
+  const timestamp = new Date().getTime();
   const res = await fetch(
-    `https://www.el-tiempo.net/api/json/v2/provincias/43/municipios/43123`
+    `https://www.el-tiempo.net/api/json/v2/provincias/43/municipios/43123?timestamp=${timestamp}`
   );
   if (!res.ok) throw new Error(res.statusText);
   const data = await res.json();
 
-  const proximosDias = data.proximos_dias.slice(0, 4);
+  const proximosDias = data.proximos_dias.slice(0, 5);
 
   // Obtener la temperatura mínima y máxima, y el primer elemento del array estado_cielo_descripcion para cada día
   const pronosticoProximosDias = proximosDias.map((dia) => {
@@ -32,14 +33,22 @@ export async function getWeather() {
   const { description } = stateSky;
   const { min, max } = temperaturas;
 
+  const sensation = (
+    0.5 * temperatura_actual +
+    61.0 +
+    (temperatura_actual - 68.0) * 1.2 +
+    viento * 0.094
+  ).toFixed(0);
+
   return {
-    humedad,
-    viento,
-    temp: temperatura_actual,
-    precipitacion,
     forecast: description,
+    humidity: humedad,
     min: min,
     max: max,
+    rain: precipitacion,
     pronosticoProximosDias,
+    sensation,
+    temp: temperatura_actual,
+    wind: viento,
   };
 }

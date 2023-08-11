@@ -75,3 +75,14 @@ body {
 .attribute {
   flex-grow: 1;
 }
+
+.resume-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  align-items: center;
+}
+
+.row-forecast {
+  display: flex;
+  flex-direction: column;
+}

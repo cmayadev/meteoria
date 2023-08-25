@@ -32,6 +32,7 @@ export async function getWeather() {
   } = data;
   const { description } = stateSky;
   const { min, max } = temperaturas;
+  const { orto, ocaso } = data.pronostico.hoy["@attributes"];
 
   const sensation = (
     0.5 * temperatura_actual +
@@ -50,5 +51,7 @@ export async function getWeather() {
     sensation,
     temp: temperatura_actual,
     wind: viento,
+    sunrise: orto,
+    sunset: ocaso,
   };
 }

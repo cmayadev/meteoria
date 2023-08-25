@@ -30,10 +30,12 @@ const Card = (props) => {
           <div className="text-7xl">{temp}°</div>
           <div className="flex flex-col mt-1">
             <div className="flex flex-row justify-between gap-2">
-              <span>Max.</span> <span>{max}°</span>
+              <span>MAX</span>
+              <span>{max}°</span>
             </div>
             <div className="flex flex-row justify-between gap-2">
-              <span>Min.</span> <span>{min}°</span>
+              <span>MIN</span>
+              <span>{min}°</span>
             </div>
           </div>
         </div>
